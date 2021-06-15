@@ -21,12 +21,12 @@ function partitionBooksByBorrowedStatus(books) {
 }
 
 function getBorrowersForBook(book, accounts) {
-  const borrows = book.borrows;
-  const borrowers = borrows.map(({ id, returned }) => {
+  const borrowList = book.borrows;
+  const borrowersOfBook = borrowList.map(({ id, returned }) => {
     const account = accounts.find((account) => account.id === id);
     return { ...account, returned };
   });
-  return borrowers
+  return borrowersOfBook
     .sort((borrowerA, borrowerB) => {
       const companyA = borrowerA.company;
       const companyB = borrowerB.company;
