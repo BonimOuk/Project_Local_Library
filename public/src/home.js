@@ -34,9 +34,10 @@ function getMostPopularBooks(books) {
   const borrows = books.reduce((acc, book) => {
     result.push({ name: book.title, count: book.borrows.length });
   }, []);
-  return topFive(result);
+  return mostPopular(result);
 }
 
+// This getAuthorCount is the helper function
 function getAuthorCount(books, id) {
   let result = books.filter((data) => data.authorId === id);
   let countBooks = 0;
@@ -50,10 +51,11 @@ function getMostPopularAuthors(books, authors) {
     name: author.name.first + " " + author.name.last,
     count: getAuthorCount(books, author.id),
   }));
-  return topFive(authorsMap);
+  return mostPopular(authorsMap);
 }
 
-function topFive(books) {
+// This mostPopular function is helper function
+function mostPopular(books) {
   let result = books
     .sort((countA, countB) => (countA.count < countB.count ? 1 : -1))
     .slice(0, 5);
@@ -68,3 +70,4 @@ module.exports = {
   getMostPopularBooks,
   getMostPopularAuthors,
 };
+
